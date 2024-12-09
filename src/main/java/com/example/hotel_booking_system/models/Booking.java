@@ -8,15 +8,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private LocalDate arrivalDate;
     private LocalDate departureDate;
+
+    @Min(value = 1, message = "Days stayed must be at least 1")
     private int daysStayed;
 
     @ManyToOne
@@ -87,6 +90,4 @@ public class Booking {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    
 }

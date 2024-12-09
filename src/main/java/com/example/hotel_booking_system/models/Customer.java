@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class Customer {
@@ -16,6 +17,8 @@ public class Customer {
     private Long id;
 
     private String name;
+    
+    @Email(message = "Email should be valid")
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -62,7 +65,4 @@ public class Customer {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
-
-    
-
 }

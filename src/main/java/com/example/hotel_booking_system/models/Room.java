@@ -8,6 +8,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Room {
@@ -18,7 +20,10 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private RoomType type;
 
+    @Min(value = 0, message = "price must be a positive number")
     private double price;
+    
+    @NotNull(message = "Availability cannot be null")
     private boolean available;
     
     public Room() {
@@ -62,6 +67,4 @@ public class Room {
     public void setAvailable(boolean available) {
         this.available = available;
     }
-
-    
 }
