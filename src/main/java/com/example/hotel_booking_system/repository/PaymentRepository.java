@@ -11,11 +11,9 @@ import com.example.hotel_booking_system.models.Payment;
 
 public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 
-    List<Payment> findByBookingId(Long bookingId);
-
     List<Payment> findByPaymentDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     @Query("SELECT p FROM Payment p WHERE p.booking.id = :bookingId")
-    List<Payment> findPaymentsByBookingId(@Param("bookingId") Long bookingId);
+    List<Payment> findPaymentsByBookingId(@Param("bookingId") int bookingId);
 
 }

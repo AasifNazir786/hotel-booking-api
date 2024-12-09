@@ -26,8 +26,7 @@ public class Room {
     @NotNull(message = "Availability cannot be null")
     private boolean available;
     
-    public Room() {
-    }
+    public Room() {}
 
     public Room(int id, RoomType type, double price, boolean available) {
         this.id = id;
