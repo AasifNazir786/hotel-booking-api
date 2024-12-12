@@ -24,7 +24,7 @@ public class Room {
     private RoomType type;
 
     @Min(value = 0, message = "price must be a positive number")
-    private double price;
+    private double pricePerDay;
     
     @NotNull(message = "Availability cannot be null")
     private boolean isAvailable;
@@ -36,11 +36,11 @@ public class Room {
     
     public Room() {}
 
-    public Room(int id, RoomType type, double price, boolean available) {
+    public Room(int id, RoomType type, double pricePerDay, boolean isAvailable) {
         this.id = id;
         this.type = type;
-        this.price = price;
-        this.available = available;
+        this.pricePerDay = pricePerDay;
+        this.isAvailable = isAvailable;
     }
 
     public int getId() {
@@ -59,12 +59,12 @@ public class Room {
         this.type = type;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPricePerDay() {
+        return pricePerDay;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPricePerDay(double pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 
     @NotNull(message = "Availability cannot be null")
