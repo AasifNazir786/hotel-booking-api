@@ -1,6 +1,7 @@
 package com.example.hotel_booking_system.models;
 
 import com.example.hotel_booking_system.enums.RoomType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,7 +27,12 @@ public class Room {
     private double price;
     
     @NotNull(message = "Availability cannot be null")
-    private boolean available;
+    private boolean isAvailable;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id", nullable = false)
+    @JsonBackReference
+    private Hotel hotel;
     
     public Room() {}
 
@@ -59,11 +67,20 @@ public class Room {
         this.price = price;
     }
 
+    @NotNull(message = "Availability cannot be null")
     public boolean isAvailable() {
-        return available;
+        return isAvailable;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setAvailable(@NotNull(message = "Availability cannot be null") boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
