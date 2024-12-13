@@ -4,73 +4,59 @@ import java.util.List;
 
 import com.example.hotel_booking_system.enums.HotelRating;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "hotels")
 public class Hotel {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int hotelId;
 
     @NotNull(message = "Hotel name can't be null")
-    private String name;
-    private String address;
+    private String hotelName;
+    private String hotelAddress;
 
     @Enumerated(EnumType.STRING)
-    private HotelRating rating;
+    private HotelRating hotelRating;
 
     @OneToMany(mappedBy = "hotel")
     List<Room> rooms;
 
-    public Hotel() {
+    public Hotel() {}
+
+    public int getHotelId() {
+        return hotelId;
     }
 
-    public Hotel(int id, String name, String address, HotelRating rating, List<Room> rooms) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.rating = rating;
-        this.rooms = rooms;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public int getId() {
-        return id;
+    public @NotNull(message = "Hotel name can't be null") String getHotelName() {
+        return hotelName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHotelName(@NotNull(message = "Hotel name can't be null") String hotelName) {
+        this.hotelName = hotelName;
     }
 
-    public String getName() {
-        return name;
+    public String getHotelAddress() {
+        return hotelAddress;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
     }
 
-    public String getAddress() {
-        return address;
+    public HotelRating getHotelRating() {
+        return hotelRating;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public HotelRating getRating() {
-        return rating;
-    }
-
-    public void setRating(HotelRating rating) {
-        this.rating = rating;
+    public void setHotelRating(HotelRating hotelRating) {
+        this.hotelRating = hotelRating;
     }
 
     public List<Room> getRooms() {
@@ -78,6 +64,14 @@ public class Hotel {
     }
 
     public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Hotel(int hotelId, String hotelName, HotelRating hotelRating, String hotelAddress, List<Room> rooms) {
+        this.hotelId = hotelId;
+        this.hotelName = hotelName;
+        this.hotelRating = hotelRating;
+        this.hotelAddress = hotelAddress;
         this.rooms = rooms;
     }
 }

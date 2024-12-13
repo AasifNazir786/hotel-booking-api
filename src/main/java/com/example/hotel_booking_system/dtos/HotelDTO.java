@@ -13,7 +13,7 @@ public class HotelDTO {
     
     private Integer hotelId;
 
-    @NotNull(message = "Hotel name can't be null")
+    @NotNull(message = "Hotel name______ can't be null")
     private String hotelName;
 
     private String hotelAddress;

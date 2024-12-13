@@ -25,25 +25,28 @@ public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
 
-    @Autowired RoomRepository roomRepository;
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Transactional
-    public Hotel createHotel(HotelDTO hotelDTO){
+    public HotelDTO createHotel(HotelDTO hotelDTO){
 
         Hotel hotel = HotelMapper.INSTANCE.toEntity(hotelDTO);
+
+        hotel = hotelRepository.save(hotel);
 
         if(hotelDTO.getRooms() != null){
 
             hotel.setRooms(saveAndMapRoomsToEntities(hotelDTO.getRooms(), hotel));
         }
-        return hotelRepository.save(hotel);
+        return mapHotelToHotelDTO(hotelRepository.save(hotel));
     }
 
     public List<HotelDTO> getAllHotels(){
 
         return hotelRepository.findAll()
         .stream()
-        .map(HotelMapper.INSTANCE::toDTO)
+        .map(this::mapHotelToHotelDTO)
         .collect(Collectors.toList());
     }
 
@@ -53,7 +56,7 @@ public class HotelService {
         Hotel hotel = hotelRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("hotel with id: "+id+" not found"));
 
-        return HotelMapper.INSTANCE.toDTO(hotel);
+        return mapHotelToHotelDTO(hotel);
     }
 
     @Transactional
@@ -62,9 +65,9 @@ public class HotelService {
         Hotel hotel = hotelRepository.findById(id)
             .orElseThrow(()->new EntityNotFoundException("hotel not found with id: "+id));
         
-        hotel.setName(dto.getHotelName());
-        hotel.setAddress(dto.getHotelAddress());
-        hotel.setRating(dto.getHotelRating());
+        hotel.setHotelName(dto.getHotelName());
+        hotel.setHotelAddress(dto.getHotelAddress());
+        hotel.setHotelRating(dto.getHotelRating());
         
         List<Room> rooms = new ArrayList<>();
         if(dto.getRooms() != null){
@@ -72,13 +75,13 @@ public class HotelService {
         }
         hotel.setRooms(rooms);
         
-        return HotelMapper.INSTANCE.toDTO(hotel);
+        return mapHotelToHotelDTO(hotel);
     }
 
 
     // HELPER FUNCTIONS
     private List<Room> saveAndMapRoomsToEntities(List<RoomDTO> roomDTOs, Hotel hotel) {
-        List<Room> existingRooms = roomRepository.findAllByHotelId(hotel.getId());
+        List<Room> existingRooms = roomRepository.findAllByHotelId(hotel.getHotelId());
         Map<Integer, Room> existingRoomMap = mapExistingRoomsById(existingRooms);
     
         // Create or update rooms
@@ -87,7 +90,7 @@ public class HotelService {
         // Remove orphaned rooms
         removeOrphanedRooms(existingRooms, roomDTOs);
     
-        return rooms;
+        return roomRepository.saveAll(rooms);
     }
     
     private Map<Integer, Room> mapExistingRoomsById(List<Room> existingRooms) {
@@ -138,4 +141,25 @@ public class HotelService {
     
         roomRepository.deleteAll(orphanedRooms);
     }
+
+    private HotelDTO mapHotelToHotelDTO(Hotel hotel){
+        HotelDTO dto = HotelMapper.INSTANCE.toDTO(hotel);
+        if(hotel.getRooms() != null){
+            List<RoomDTO> roomDTOS = mapRoomEntitiesToDTOs(hotel.getRooms());
+            dto.setRooms(roomDTOS);
+        }
+
+        return dto;
+    }
+
+    private List<RoomDTO> mapRoomEntitiesToDTOs(List<Room> rooms) {
+        return rooms.stream()
+            .map(room -> {
+                RoomDTO dto = RoomMapper.INSTANCE.toDTO(room);
+                dto.setHotelId(room.getHotel().getHotelId());
+                return dto;
+            })
+            .collect(Collectors.toList());
+    }
+
 }

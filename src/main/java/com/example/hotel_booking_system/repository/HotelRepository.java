@@ -10,17 +10,21 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.hotel_booking_system.enums.HotelRating;
 import com.example.hotel_booking_system.models.Hotel;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public interface HotelRepository extends JpaRepository<Hotel, Integer>{
     
-    Hotel findByName(String name);
+//    Hotel findByName(String name);
 
-    @Query("SELECT h FROM Hotel h JOIN h.rooms r WHERE r.price BETWEEN :minPrice AND :maxPrice")
-    List<Hotel> findHotelsWithRoomsInPriceRange(@Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice);
-
-    @Query("SELECT h FROM Hotel h WHERE h.rating = :rating")
-    Page<Hotel> findHotelsByRatingWithPagination(@Param("rating") HotelRating rating, Pageable pageable);
+//    @Query("SELECT h FROM Hotel h JOIN h.rooms r WHERE r.price BETWEEN :minPrice AND :maxPrice")
+//    List<Hotel> findHotelsWithRoomsInPriceRange(@Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice);
+//
+//    @Query("SELECT h FROM Hotel h WHERE h.rating = :rating")
+//    Page<Hotel> findByRatingWithPagination(@Param("rating") HotelRating rating, Pageable pageable);
+//
+//    @Query("SELECT h FROM Hotel h WHERE h.address = :address")
+//    Page<Hotel> findByAddress(@Param("address") String address, Pageable pageable);
 
 
 }

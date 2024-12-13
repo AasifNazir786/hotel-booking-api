@@ -113,7 +113,7 @@ public class RoomService {
             .stream()
             .map(room -> {
                 RoomDTO dto = RoomMapper.INSTANCE.toDTO(room);
-                dto.setHotelId(room.getHotel().getId());
+                dto.setHotelId(room.getHotel().getHotelId());
                 return dto;
             })
             .collect(Collectors.toList());
@@ -124,7 +124,7 @@ public class RoomService {
         room.setPricePerDay(dto.getPricePerDay());
         room.setType(dto.getType());
 
-        if (dto.getHotelId() != 0 && dto.getHotelId() != room.getHotel().getId()) {
+        if (dto.getHotelId() != 0 && dto.getHotelId() != room.getHotel().getHotelId()) {
             Hotel hotel = validateAndRetrieveHotel(dto);
             room.setHotel(hotel);
         }

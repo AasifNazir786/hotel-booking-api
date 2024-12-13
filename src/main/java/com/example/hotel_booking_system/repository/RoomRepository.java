@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.hotel_booking_system.models.Room;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoomRepository extends JpaRepository<Room, Integer>{
 
     @Query("SELECT r FROM Room r JOIN r.hotel h WHERE h.id = :id")
