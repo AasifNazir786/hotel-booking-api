@@ -138,5 +138,4 @@ public class HotelService {
     
         roomRepository.deleteAll(orphanedRooms);
     }
-    
 }

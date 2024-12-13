@@ -16,14 +16,14 @@ public class RoomDTO {
     @NotNull(message = "Availability cannot be null")
     private boolean isAvailable;
 
-    private int hoteId;
+    private int hotelId;
 
-    public RoomDTO(int id, RoomType type, double pricePerDay, boolean isAvailable, int hoteId) {
+    public RoomDTO(int id, RoomType type, double pricePerDay, boolean isAvailable, int hotelId) {
         this.id = id;
         this.type = type;
         this.pricePerDay = pricePerDay;
         this.isAvailable = isAvailable;
-        this.hoteId = hoteId;
+        this.hotelId = hotelId;
     }
 
     public int getId() {
@@ -60,11 +60,11 @@ public class RoomDTO {
         isAvailable = available;
     }
 
-    public int getHoteId() {
-        return hoteId;
+    public int getHotelId() {
+        return hotelId;
     }
 
-    public void setHoteId(int hoteId) {
-        this.hoteId = hoteId;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 }
