@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import com.example.hotel_booking_system.dtos.HotelDTO;
 import com.example.hotel_booking_system.models.Hotel;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses={RoomMapper.class})
 public interface HotelMapper {
 
     HotelMapper INSTANCE = Mappers.getMapper(HotelMapper.class);

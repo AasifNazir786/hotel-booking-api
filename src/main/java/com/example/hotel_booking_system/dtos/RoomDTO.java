@@ -56,8 +56,8 @@ public class RoomDTO {
         return isAvailable;
     }
 
-    public void setAvailable(@NotNull(message = "Availability cannot be null") boolean available) {
-        isAvailable = available;
+    public void setAvailable(@NotNull(message = "Availability cannot be null") boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public int getHotelId() {
