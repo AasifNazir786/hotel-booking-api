@@ -2,34 +2,45 @@ package com.example.hotel_booking_system.models;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "bookings")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private int id;
+
+    @NotNull(message = "Arrival date cannot be null")
     private LocalDate arrivalDate;
+
+    @NotNull(message = "Departure date cannot be null")
     private LocalDate departureDate;
 
     @Min(value = 1, message = "Days stayed must be at least 1")
     private int daysStayed;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "room_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
     public Booking() {
     }
 
-    public Booking(Long id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Room room,
+    public Booking(int id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Room room,
             Customer customer) {
         this.id = id;
         this.arrivalDate = arrivalDate;
@@ -39,11 +50,11 @@ public class Booking {
         this.customer = customer;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -26,18 +26,21 @@ public class RoomService {
     @Autowired
     private HotelRepository hotelRepository;
 
+    @Autowired
+    private RoomMapper roomMapper;
+
 
     @Transactional
     public RoomDTO createRoom(RoomDTO dto){
 
-        Room room = RoomMapper.INSTANCE.toEntity(dto);
+        Room room = roomMapper.toEntity(dto);
 
         Hotel hotel = validateAndRetrieveHotel(dto);
         room.setHotel(hotel);
 
         Room savedRoom = roomRepository.save(room);
 
-        return RoomMapper.INSTANCE.toDTO(savedRoom);
+        return roomMapper.toDTO(savedRoom);
     }
 
     public List<RoomDTO> getAllAvailableRoomsByHotelId(int hotelId){
@@ -71,7 +74,7 @@ public class RoomService {
         Room room = roomRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("room not found with id: "+ id));
 
-        return RoomMapper.INSTANCE.toDTO(room);
+        return roomMapper.toDTO(room);
     }
 
     @Transactional
@@ -82,14 +85,14 @@ public class RoomService {
         if (room == null) {
 
             Hotel hotel = validateAndRetrieveHotel(dto);
-            room = RoomMapper.INSTANCE.toEntity(dto);
+            room = roomMapper.toEntity(dto);
             room.setHotel(hotel);
 
         } else {
             updateRoomFields(room, dto);
         }
     
-        return RoomMapper.INSTANCE.toDTO(roomRepository.save(room));
+        return roomMapper.toDTO(roomRepository.save(room));
     }
     
 
@@ -112,7 +115,7 @@ public class RoomService {
         return rooms
             .stream()
             .map(room -> {
-                RoomDTO dto = RoomMapper.INSTANCE.toDTO(room);
+                RoomDTO dto = roomMapper.toDTO(room);
                 dto.setHotelId(room.getHotel().getHotelId());
                 return dto;
             })

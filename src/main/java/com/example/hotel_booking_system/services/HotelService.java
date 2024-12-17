@@ -26,12 +26,18 @@ public class HotelService {
     private HotelRepository hotelRepository;
 
     @Autowired
+    private HotelMapper hotelMapper;
+
+    @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private RoomMapper roomMapper;
 
     @Transactional
     public HotelDTO createHotel(HotelDTO hotelDTO){
 
-        Hotel hotel = HotelMapper.INSTANCE.toEntity(hotelDTO);
+        Hotel hotel = hotelMapper.toEntity(hotelDTO);
 
         hotel = hotelRepository.save(hotel);
 
@@ -121,7 +127,7 @@ public class HotelService {
     }
     
     private Room createRoom(RoomDTO dto, Hotel hotel) {
-        Room room = RoomMapper.INSTANCE.toEntity(dto);
+        Room room = roomMapper.toEntity(dto);
         room.setHotel(hotel);
         return room;
     }
@@ -143,7 +149,7 @@ public class HotelService {
     }
 
     private HotelDTO mapHotelToHotelDTO(Hotel hotel){
-        HotelDTO dto = HotelMapper.INSTANCE.toDTO(hotel);
+        HotelDTO dto = hotelMapper.toDTO(hotel);
         if(hotel.getRooms() != null){
             List<RoomDTO> roomDTOS = mapRoomEntitiesToDTOs(hotel.getRooms());
             dto.setRooms(roomDTOS);
@@ -155,7 +161,7 @@ public class HotelService {
     private List<RoomDTO> mapRoomEntitiesToDTOs(List<Room> rooms) {
         return rooms.stream()
             .map(room -> {
-                RoomDTO dto = RoomMapper.INSTANCE.toDTO(room);
+                RoomDTO dto = roomMapper.toDTO(room);
                 dto.setHotelId(room.getHotel().getHotelId());
                 return dto;
             })

@@ -24,6 +24,9 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
 
     @Autowired
+    private PaymentMapper paymentMapper;
+
+    @Autowired
     private BookingRepository bookingRepository;
 
     /*
@@ -32,7 +35,7 @@ public class PaymentService {
     @Transactional
     public PaymentDTO addPayment(PaymentDTO paymentDTO) {
         
-        Payment payment = PaymentMapper.INSTANCE.toEntity(paymentDTO);
+        Payment payment = paymentMapper.toEntity(paymentDTO);
 
         payment.setBooking(validateAndRetrieveBooking(paymentDTO.getBookingId()));
         payment.setPaymentDate(LocalDateTime.now());
@@ -86,7 +89,7 @@ public class PaymentService {
 
     private PaymentDTO mapEntityToDTO(Payment payment){
 
-        PaymentDTO dto = PaymentMapper.INSTANCE.toDTO(payment);
+        PaymentDTO dto = paymentMapper.toDTO(payment);
 
         dto.setBookingId(payment.getBooking().getId());
 

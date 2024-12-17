@@ -2,7 +2,13 @@ package com.example.hotel_booking_system.models;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
 @Entity
@@ -10,12 +16,12 @@ import jakarta.validation.constraints.Email;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long customerId;
 
-    private String name;
+    private String customerName;
     
     @Email(message = "Email should be valid")
-    private String email;
+    private String customerEmail;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Booking> bookings;
@@ -23,35 +29,36 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long id, String name, String email, List<Booking> bookings) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    public Customer(Long customerId, String customerName,
+            @Email(message = "Email should be valid") String customerEmail, List<Booking> bookings) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
         this.bookings = bookings;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public List<Booking> getBookings() {
@@ -61,4 +68,6 @@ public class Customer {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    
 }
