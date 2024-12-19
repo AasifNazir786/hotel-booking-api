@@ -36,7 +36,7 @@ public class PaymentController {
         Get payment details by payment ID.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentDTO> getPaymentById(@PathVariable("id") int paymentId) {
+    public ResponseEntity<PaymentDTO> getPaymentById(@PathVariable("id") Long paymentId) {
         PaymentDTO payment = paymentService.getPaymentById(paymentId);
         return ResponseEntity.ok(payment);
     }
@@ -45,7 +45,7 @@ public class PaymentController {
         Get all payments for a specific booking.
      */
     @GetMapping("/booking/{bookingId}")
-    public ResponseEntity<List<PaymentDTO>> getPaymentsByBookingId(@PathVariable("bookingId") int bookingId) {
+    public ResponseEntity<List<PaymentDTO>> getPaymentsByBookingId(@PathVariable("bookingId") Long bookingId) {
         List<PaymentDTO> payments = paymentService.getPaymentsByBookingId(bookingId);
         return ResponseEntity.ok(payments);
     }

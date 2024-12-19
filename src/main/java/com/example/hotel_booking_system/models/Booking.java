@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotNull(message = "Arrival date cannot be null")
     private LocalDate arrivalDate;
@@ -40,7 +40,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Room room,
+    public Booking(Long id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Room room,
             Customer customer) {
         this.id = id;
         this.arrivalDate = arrivalDate;
@@ -50,11 +50,11 @@ public class Booking {
         this.customer = customer;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

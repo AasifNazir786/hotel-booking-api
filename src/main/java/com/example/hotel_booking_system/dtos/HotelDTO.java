@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class HotelDTO {
     
-    private Integer hotelId;
+    private Long hotelId;
 
     @NotNull(message = "Hotel name can't be null")
     private String hotelName;
@@ -24,7 +24,7 @@ public class HotelDTO {
     @OneToMany(mappedBy = "hotel")
     List<RoomDTO> rooms;
 
-    public HotelDTO(Integer hotelId, @NotNull(message = "Hotel name can't be null") String hotelName,
+    public HotelDTO(Long hotelId, @NotNull(message = "Hotel name can't be null") String hotelName,
             String hotelAddress, HotelRating hotelRating, List<RoomDTO> rooms) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
@@ -33,11 +33,11 @@ public class HotelDTO {
         this.rooms = rooms;
     }
 
-    public Integer getHotelId() {
+    public Long getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(Integer hotelId) {
+    public void setHotelId(Long hotelId) {
         this.hotelId = hotelId;
     }
 

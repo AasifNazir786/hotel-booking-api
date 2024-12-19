@@ -4,7 +4,14 @@ import java.util.List;
 
 import com.example.hotel_booking_system.enums.HotelRating;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -13,7 +20,7 @@ public class Hotel {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int hotelId;
+    private Long hotelId;
 
     @NotNull(message = "Hotel name can't be null")
     private String hotelName;
@@ -27,11 +34,19 @@ public class Hotel {
 
     public Hotel() {}
 
-    public int getHotelId() {
+    public Hotel(Long hotelId, String hotelName, HotelRating hotelRating, String hotelAddress, List<Room> rooms) {
+        this.hotelId = hotelId;
+        this.hotelName = hotelName;
+        this.hotelRating = hotelRating;
+        this.hotelAddress = hotelAddress;
+        this.rooms = rooms;
+    }
+
+    public Long getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(int hotelId) {
+    public void setHotelId(Long hotelId) {
         this.hotelId = hotelId;
     }
 
@@ -64,14 +79,6 @@ public class Hotel {
     }
 
     public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public Hotel(int hotelId, String hotelName, HotelRating hotelRating, String hotelAddress, List<Room> rooms) {
-        this.hotelId = hotelId;
-        this.hotelName = hotelName;
-        this.hotelRating = hotelRating;
-        this.hotelAddress = hotelAddress;
         this.rooms = rooms;
     }
 }

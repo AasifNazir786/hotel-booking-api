@@ -1,12 +1,12 @@
-// package com.example.hotel_booking_system.repository;
+package com.example.hotel_booking_system.repository;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// import com.example.hotel_booking_system.models.Customer;
+import com.example.hotel_booking_system.models.Customer;
 
-// public interface CustomerRepository extends JpaRepository<Customer, Integer>{
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
     
-//     Customer findByEmail(String email);
+    Customer findByEmail(String email);
 
-//     Customer findByName(String name);
-// }
+    Customer findByName(String name);
+}

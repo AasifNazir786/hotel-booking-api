@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public class RoomDTO {
-    private Integer id;
+    private Long id;
 
     private RoomType type;
 
@@ -16,9 +16,9 @@ public class RoomDTO {
     @NotNull(message = "Availability cannot be null")
     private boolean isAvailable;
 
-    private int hotelId;
+    private Long hotelId;
 
-    public RoomDTO(int id, RoomType type, double pricePerDay, boolean isAvailable, int hotelId) {
+    public RoomDTO(Long id, RoomType type, double pricePerDay, boolean isAvailable, Long hotelId) {
         this.id = id;
         this.type = type;
         this.pricePerDay = pricePerDay;
@@ -26,11 +26,11 @@ public class RoomDTO {
         this.hotelId = hotelId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class RoomDTO {
         this.isAvailable = isAvailable;
     }
 
-    public int getHotelId() {
+    public Long getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(int hotelId) {
+    public void setHotelId(Long hotelId) {
         this.hotelId = hotelId;
     }
 }

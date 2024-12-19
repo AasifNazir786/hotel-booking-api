@@ -47,7 +47,7 @@ public class PaymentService {
         Get a payment by its ID
      */
     @Transactional(readOnly = true)
-    public PaymentDTO getPaymentById(int paymentId) {
+    public PaymentDTO getPaymentById(Long paymentId) {
 
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new IllegalArgumentException("Payment not found with id: " + paymentId));
@@ -59,7 +59,7 @@ public class PaymentService {
         Get all payments for a specific booking
      */
     @Transactional(readOnly = true)
-    public List<PaymentDTO> getPaymentsByBookingId(int bookingId) {
+    public List<PaymentDTO> getPaymentsByBookingId(Long bookingId) {
         
         return paymentRepository.findByBookingId(bookingId)
                 .stream()
@@ -79,7 +79,7 @@ public class PaymentService {
     /*
         Helper functions
      */
-    private Booking validateAndRetrieveBooking(int id){
+    private Booking validateAndRetrieveBooking(Long id){
 
         Booking booking = bookingRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("booking not found with id: "+id));

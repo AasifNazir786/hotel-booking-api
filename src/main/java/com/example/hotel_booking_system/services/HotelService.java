@@ -57,7 +57,7 @@ public class HotelService {
     }
 
     @Transactional
-    public HotelDTO getById(int id){
+    public HotelDTO getById(Long id){
         
         Hotel hotel = hotelRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("hotel with id: "+id+" not found"));
@@ -66,7 +66,7 @@ public class HotelService {
     }
 
     @Transactional
-    public HotelDTO updateHotelById(int id, HotelDTO dto){
+    public HotelDTO updateHotelById(Long id, HotelDTO dto){
 
         Hotel hotel = hotelRepository.findById(id)
             .orElseThrow(()->new EntityNotFoundException("hotel not found with id: "+id));
@@ -88,7 +88,7 @@ public class HotelService {
     // HELPER FUNCTIONS
     private List<Room> saveAndMapRoomsToEntities(List<RoomDTO> roomDTOs, Hotel hotel) {
         List<Room> existingRooms = roomRepository.findAllByHotelId(hotel.getHotelId());
-        Map<Integer, Room> existingRoomMap = mapExistingRoomsById(existingRooms);
+        Map<Long, Room> existingRoomMap = mapExistingRoomsById(existingRooms);
     
         // Create or update rooms
         List<Room> rooms = mapAndSaveRooms(roomDTOs, hotel, existingRoomMap);
@@ -99,13 +99,13 @@ public class HotelService {
         return roomRepository.saveAll(rooms);
     }
     
-    private Map<Integer, Room> mapExistingRoomsById(List<Room> existingRooms) {
+    private Map<Long, Room> mapExistingRoomsById(List<Room> existingRooms) {
         return existingRooms
                 .stream()
                 .collect(Collectors.toMap(Room::getId, room -> room));
     }
     
-    private List<Room> mapAndSaveRooms(List<RoomDTO> roomDTOs, Hotel hotel, Map<Integer, Room> existingRoomMap) {
+    private List<Room> mapAndSaveRooms(List<RoomDTO> roomDTOs, Hotel hotel, Map<Long, Room> existingRoomMap) {
         return roomDTOs.stream()
                 .map(dto -> {
                     Room room;
@@ -134,7 +134,7 @@ public class HotelService {
     
     private void removeOrphanedRooms(List<Room> existingRooms, List<RoomDTO> roomDTOs) {
 
-        List<Integer> incomingRoomIds = roomDTOs
+        List<Long> incomingRoomIds = roomDTOs
                 .stream()
                 .map(RoomDTO::getId)
                 .filter(id -> id != null)

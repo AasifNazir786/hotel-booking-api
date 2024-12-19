@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class BookingDTO {
 
-    private int id;
+    private Long id;
     private LocalDate arrivalDate;
     private LocalDate departureDate;
     private int daysStayed;
@@ -14,7 +14,7 @@ public class BookingDTO {
     public BookingDTO() {
     }
 
-    public BookingDTO(int id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Long roomId,
+    public BookingDTO(Long id, LocalDate arrivalDate, LocalDate departureDate, int daysStayed, Long roomId,
             Long customerId) {
         this.id = id;
         this.arrivalDate = arrivalDate;
@@ -24,11 +24,11 @@ public class BookingDTO {
         this.customerId = customerId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

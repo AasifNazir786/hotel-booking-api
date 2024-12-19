@@ -43,7 +43,7 @@ public class RoomService {
         return roomMapper.toDTO(savedRoom);
     }
 
-    public List<RoomDTO> getAllAvailableRoomsByHotelId(int hotelId){
+    public List<RoomDTO> getAllAvailableRoomsByHotelId(Long hotelId){
 
         hotelRepository.findById(hotelId)
             .orElseThrow(() -> new EntityNotFoundException("Hotel not found with Id: " + hotelId));
@@ -53,7 +53,7 @@ public class RoomService {
         return convertToDTOs(rooms);
     }
 
-    public List<RoomDTO> getAllByHotelIdSorted(int hotelId){
+    public List<RoomDTO> getAllByHotelIdSorted(Long hotelId){
 
         hotelRepository.findById(hotelId)
             .orElseThrow(() -> new EntityNotFoundException("Hotel not found with Id: " + hotelId));
@@ -69,7 +69,7 @@ public class RoomService {
         return convertToDTOs(rooms);
     }
 
-    public RoomDTO getRoomById(int id){
+    public RoomDTO getRoomById(Long id){
         
         Room room = roomRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("room not found with id: "+ id));
@@ -78,7 +78,7 @@ public class RoomService {
     }
 
     @Transactional
-    public RoomDTO updateOrCreateRoomDTO(int id, RoomDTO dto) {
+    public RoomDTO updateOrCreateRoomDTO(Long id, RoomDTO dto) {
     
         Room room = roomRepository.findById(id).orElse(null);
     
@@ -127,7 +127,8 @@ public class RoomService {
         room.setPricePerDay(dto.getPricePerDay());
         room.setType(dto.getType());
 
-        if (dto.getHotelId() != 0 && dto.getHotelId() != room.getHotel().getHotelId()) {
+        if (dto.getHotelId() != null && !dto.getHotelId().equals(room.getHotel().getHotelId())) {
+            
             Hotel hotel = validateAndRetrieveHotel(dto);
             room.setHotel(hotel);
         }

@@ -3,7 +3,15 @@ package com.example.hotel_booking_system.models;
 import com.example.hotel_booking_system.enums.RoomType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,7 +20,7 @@ import jakarta.validation.constraints.NotNull;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private RoomType type;
@@ -30,18 +38,18 @@ public class Room {
     
     public Room() {}
 
-    public Room(int id, RoomType type, double pricePerDay, boolean isAvailable) {
+    public Room(Long id, RoomType type, double pricePerDay, boolean isAvailable) {
         this.id = id;
         this.type = type;
         this.pricePerDay = pricePerDay;
         this.isAvailable = isAvailable;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

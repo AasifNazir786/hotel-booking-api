@@ -39,14 +39,14 @@ public class HotelController {
 
     // Get a hotel by its ID
     @GetMapping("/{id}")
-    public ResponseEntity<HotelDTO> getHotelById(@PathVariable int id) {
+    public ResponseEntity<HotelDTO> getHotelById(@PathVariable Long id) {
         HotelDTO hotel = hotelService.getById(id);
         return ResponseEntity.ok(hotel);
     }
 
     // Update a hotel by its ID
     @PutMapping("/{id}")
-    public ResponseEntity<HotelDTO> updateHotelById(@PathVariable int id,@RequestBody HotelDTO hotelDTO) {
+    public ResponseEntity<HotelDTO> updateHotelById(@PathVariable Long id,@RequestBody HotelDTO hotelDTO) {
         HotelDTO updatedHotel = hotelService.updateHotelById(id, hotelDTO);
         return ResponseEntity.ok(updatedHotel);
     }

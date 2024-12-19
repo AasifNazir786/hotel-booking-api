@@ -5,26 +5,26 @@ import java.time.LocalDateTime;
 
 public class PaymentDTO {
 
-    private int id;
+    private Long id;
     private BigDecimal amount;
     private LocalDateTime paymentDate;
-    private int bookingId;  // Reference to Booking by ID
+    private Long bookingId;  // Reference to Booking by ID
 
     public PaymentDTO() {
     }
 
-    public PaymentDTO(int id, BigDecimal amount, LocalDateTime paymentDate, int bookingId) {
+    public PaymentDTO(Long id, BigDecimal amount, LocalDateTime paymentDate, Long bookingId) {
         this.id = id;
         this.amount = amount;
         this.paymentDate = paymentDate;
         this.bookingId = bookingId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,11 +44,11 @@ public class PaymentDTO {
         this.paymentDate = paymentDate;
     }
 
-    public int getBookingId() {
+    public Long getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(Long bookingId) {
         this.bookingId = bookingId;
     }
 }

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.example.hotel_booking_system.models.Payment;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Integer>{
+public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
     @Query("select p from Payment p join p.booking b where b.id = :bookingId")
-    List<Payment> findByBookingId(int bookingId);
+    List<Payment> findByBookingId(Long bookingId);
 
 }
