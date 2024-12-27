@@ -36,7 +36,7 @@ public class RoomController {
 
     // get all rooms which are available by HotelId
     @GetMapping("/hotels/{id}/available")
-    public ResponseEntity<List<RoomDTO>> getAllAvailableRooms(@Valid @PathVariable("id") int hotelId){
+    public ResponseEntity<List<RoomDTO>> getAllAvailableRooms(@Valid @PathVariable("id") Long hotelId){
 
         List<RoomDTO> dtos = roomService.getAllAvailableRoomsByHotelId(hotelId);
 
@@ -45,20 +45,20 @@ public class RoomController {
 
     // get all rooms by HotelId in a sorted order
     @GetMapping("/hotels/{id}/sorted")
-    public ResponseEntity<List<RoomDTO>> getAllRoomsSorted(@PathVariable("id") int hotelId){
+    public ResponseEntity<List<RoomDTO>> getAllRoomsSorted(@PathVariable("id") Long hotelId){
 
         return ResponseEntity.ok(roomService.getAllByHotelIdSorted(hotelId));
     }
 
     // get Room by its Id
     @GetMapping("/{id}")
-    public ResponseEntity<RoomDTO> getRoomById(@PathVariable("id") int roomId){
+    public ResponseEntity<RoomDTO> getRoomById(@PathVariable("id") Long roomId){
         return ResponseEntity.ok(roomService.getRoomById(roomId));
     }
 
     // update room by its Id
     @PutMapping("/{id}")
-    public ResponseEntity<RoomDTO> updateRoom(@PathVariable int id, @Valid @RequestBody RoomDTO dto){
+    public ResponseEntity<RoomDTO> updateRoom(@PathVariable Long id, @Valid @RequestBody RoomDTO dto){
 
         RoomDTO roomDTO = roomService.updateOrCreateRoomDTO(id, dto);
 
