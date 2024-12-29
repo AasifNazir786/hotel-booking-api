@@ -3,6 +3,7 @@ package com.example.hotel_booking_system.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.hotel_booking_system.dtos.BookingDTO;
@@ -52,9 +53,9 @@ public class BookingService implements GenericBookingRepo{
     /*
      * for retrieving a page of bookings from the database
      */
-    public List<BookingDTO> getPageOfBookings(){
+    public List<BookingDTO> getPageOfBookings(Pageable pageable){
 
-        return bookingRepository.findAll()
+        return bookingRepository.findAll(pageable)
                 .stream()
                 .map(this::mapBookingToBookingDTO)
                 .toList();
