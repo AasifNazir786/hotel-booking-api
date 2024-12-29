@@ -1,4 +1,4 @@
-package com.example.hotel_booking_system.repository;
+package com.example.hotel_booking_system.jpa_repository;
 
 import java.util.List;
 import java.util.Optional;

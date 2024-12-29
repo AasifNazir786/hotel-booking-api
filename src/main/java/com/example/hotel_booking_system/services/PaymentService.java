@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hotel_booking_system.dtos.PaymentDTO;
+import com.example.hotel_booking_system.jpa_repository.BookingRepository;
+import com.example.hotel_booking_system.jpa_repository.PaymentRepository;
 import com.example.hotel_booking_system.mappers.PaymentMapper;
 import com.example.hotel_booking_system.models.Booking;
 import com.example.hotel_booking_system.models.Payment;
-import com.example.hotel_booking_system.repository.BookingRepository;
-import com.example.hotel_booking_system.repository.PaymentRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 

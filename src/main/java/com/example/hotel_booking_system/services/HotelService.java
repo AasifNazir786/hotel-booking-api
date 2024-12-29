@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.hotel_booking_system.dtos.HotelDTO;
 import com.example.hotel_booking_system.dtos.RoomDTO;
+import com.example.hotel_booking_system.jpa_repository.HotelRepository;
+import com.example.hotel_booking_system.jpa_repository.RoomRepository;
 import com.example.hotel_booking_system.mappers.HotelMapper;
 import com.example.hotel_booking_system.mappers.RoomMapper;
 import com.example.hotel_booking_system.models.Hotel;
 import com.example.hotel_booking_system.models.Room;
-import com.example.hotel_booking_system.repository.HotelRepository;
-import com.example.hotel_booking_system.repository.RoomRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

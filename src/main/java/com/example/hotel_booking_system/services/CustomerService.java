@@ -11,13 +11,13 @@ import com.example.hotel_booking_system.dtos.BasicCustomerDTO;
 import com.example.hotel_booking_system.dtos.BookingDTO;
 import com.example.hotel_booking_system.dtos.CustomerDTO;
 import com.example.hotel_booking_system.generics_repository.GenericCustomerRepo;
+import com.example.hotel_booking_system.jpa_repository.CustomerRepository;
+import com.example.hotel_booking_system.jpa_repository.RoomRepository;
 import com.example.hotel_booking_system.mappers.BookingMapper;
 import com.example.hotel_booking_system.mappers.CustomerMapper;
 import com.example.hotel_booking_system.models.Booking;
 import com.example.hotel_booking_system.models.Customer;
 import com.example.hotel_booking_system.models.Room;
-import com.example.hotel_booking_system.repository.CustomerRepository;
-import com.example.hotel_booking_system.repository.RoomRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
